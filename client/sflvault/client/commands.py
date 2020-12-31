@@ -36,6 +36,7 @@ from Crypto.PublicKey import ElGamal
 from base64 import b64decode, b64encode
 from datetime import *
 
+import sflvault.client
 from sflvault.client.client import SFLvaultClient
 from sflvault.common.crypto import *
 from sflvault.common import VaultError
@@ -238,7 +239,7 @@ class SFLvaultCommand(object):
             sys.exit()
 
         # Normal help screen.
-        print("%s version %s" % ('SFLvault-client', pkgres.get_distribution('SFLvault_client').version))
+        print("%s version %s" % ('SFLvault-client', sflvault.client.__version__))
         print("---------------------------------------------")
 
         if not cmd:

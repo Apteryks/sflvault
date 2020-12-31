@@ -23,3 +23,4 @@ from sflvault.client.commands import SFLvaultCommand
 from sflvault.client.commands import SFLvaultShell
 from sflvault.client.client import SFLvaultClient
 
+__version__ = '0.7.8.2'

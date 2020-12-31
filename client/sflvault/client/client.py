@@ -20,19 +20,19 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pkg_resources as pkgres
-from configparser import ConfigParser, NoSectionError
+from configparser import ConfigParser
+import logging
 import xmlrpc.client
 import getpass
 import sys
 import re
 import os
-import time
 
 from subprocess import Popen, PIPE
 
 from decorator import decorator
-from pprint import pprint
 
+import sflvault.client
 from sflvault.common import VaultError
 from sflvault.common.crypto import *
 from sflvault.client.utils import *
@@ -106,7 +106,9 @@ def authenticate(keep_privkey=False):
 
         # TODO: check also is the privkey (ElGamal obj) has been cached
         #       in self.privkey (when invoked with keep_privkey)
-        retval = self.vault.login(username, pkgres.get_distribution('SFLvault_client').version)
+        version = sflvault.client.__version__
+
+        retval = self.vault.login(username, version)
         self.authret = retval
         if not retval['error']:
             # try the last token

@@ -26,12 +26,18 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
+import ast
 import platform
 
+_version_re = re.compile(r'__version__\s*=\s*(.*)')
+
+with open('sflvault/client/__init__.py', 'rb') as f:
+    version = str(ast.literal_eval(_version_re.search(
+        f.read().decode('utf-8')).group(1)))
 
 setup(
     name='SFLvault-client',
-    version="0.7.8.2",
+    version=version,
     description='Networked credentials store and authentication manager - Client',
     author='Alexandre Bourget',
     author_email='alexandre.bourget@savoirfairelinux.com',
